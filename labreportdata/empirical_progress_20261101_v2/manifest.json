@@ -1,0 +1,53 @@
+{
+  "kind": "measured-progress-report",
+  "final_project_complete": false,
+  "baselines": {
+    "17": "de03543e32706e635f8f0749ae0a6169499d0dfae445bcd437deb5f7298fd1ed",
+    "43": "9884da0fa6a83f4fea29b395b234ae363b938fb8bfb386f57c82137208497b54",
+    "97": "0f8b3d03ec4107193f06db5fc5c92c183128dfff03e2c8afdcefe2dc903ea20a"
+  },
+  "e3": {
+    "17": "0f63db5729acf5312c3df0f57a2d13ab75f26b0a5f51b0b62859f10552d61bc7",
+    "43": "e01eb199dc0e055ea64bebb8e4b0d4294839138b7e6a0a5e0609cefc1b2ec63e",
+    "97": "4ab2c77f2f5a70d4a104ca689908adb6ce68f81dca1114beed73cc2a3a06ef4e"
+  },
+  "figures": {
+    "baseline_accuracy": {
+      "caption": "三种子均值 ± 样本标准差；每种子每测试划分 400 行、200 个场景组。文本与结构化特征分别展示，不能将差异全归因于模型。",
+      "png_sha256": "1e0ee7d046abe3ed04a01f4e39f8a67d44a892778437cd485e00fc02d7e29585"
+    },
+    "reliability": {
+      "caption": "每个种子的温度只在自己的独立 calibration 划分拟合，再合并测试桶作图。OOD 校准表现不保证改善。",
+      "png_sha256": "85eba62b06e661de806b728151dc59fdc3697ed9e00f7000b089366f66427f59"
+    },
+    "risk_coverage": {
+      "caption": "阈值保留完整置信度相同的样本组；曲线为三种子的阶梯函数均值。低置信度检错与错误可被升级修复是两个不同问题。",
+      "png_sha256": "69c7333fdc68e7daa4a31256aa6995bf1fb916cea764c90e60a24b36e9939ba6"
+    },
+    "matched_budget_routing": {
+      "caption": "探索性 CPU 分类器重放；每个预算所有策略升级数量相同。Oracle 使用测试标签，仅作上界。图中的批量排序曲线不用于选择冻结阈值。",
+      "png_sha256": "166000bb417a15a7132289eaf00ff533efd485920afdedb2718138c7f015aaa5"
+    },
+    "fix_harm_and_budget": {
+      "caption": "冻结阈值按种子独立选择。修正与损害使用决策行计数，置信区间按场景组抽样；同场景的两个选项顺序变体不是独立样本。",
+      "png_sha256": "81c1c4f24ecbffa6a202e29587d995154ff021e9f964748727d249bf566eeb32"
+    },
+    "decision_scenarios": {
+      "caption": "每一类别按 SHA-256(id) 确定展示样本；同时给出成功和失败，完整类别计数见原始 casebook。案例只能说明机制，不能证明总体优势。",
+      "png_sha256": "d51640cba2b65bf21fc6a7e3e0d06a7b6eb14cbf8eaa5d4ac80a8c531abdb9b5"
+    },
+    "shared_handoff_architecture": {
+      "caption": "实现不要求 GPU 创建网络连接；部署目标与已验证范围分别标示。原子发布、身份绑定、取消和失败回退均有独立进程检查。",
+      "png_sha256": "65ee83d1d88814a8ed569304719b63548f6cbd9a747cc1614464f6e59891e93e"
+    },
+    "shared_handoff_latency": {
+      "caption": "同一批 4,800 个留出请求重新实时执行，不是新增的独立质量样本。柱为全体请求均值，虚线为单请求 P95；S2 时间按全体请求摊销。不能将 CPU 时延外推为 GPU/API 服务性能。",
+      "png_sha256": "fcd7e89fdc25f1f2acbc2b4c62a4dc39aeb46596512de4bf1dfe68d552c64d93"
+    }
+  },
+  "shared_handoff_sha256": "71fd591df4b7ebb112d94527b57eab857025bb167d23d824960cc22e50837813",
+  "shared_audit_sha256": "f471f77b094d6cdc14dc611b6bafd47a3d2e0551881eede4325e5a56d01dcf66",
+  "report_html_sha256": "d255e4b17b7c36a61363a4af682bffa3e13459d87e088dbcb9f49e4d9b4a3f02",
+  "report_pdf_sha256": "05658fb07e208d3859c196f07cef01e02adbdd16cfa15f4ef2ebc99e1b171638",
+  "builder_source_sha256": "c80bda141debc697dce9e6536a5c3e235b0b911466f2f623519e10aa0c913183"
+}

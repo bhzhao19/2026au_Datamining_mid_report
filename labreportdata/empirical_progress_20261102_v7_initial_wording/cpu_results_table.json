@@ -1,0 +1,119 @@
+{
+  "kind": "complete-audited-cpu-condition-report-table",
+  "full_project_complete": false,
+  "headers": [
+    "种子",
+    "条件",
+    "准确率 %",
+    "95% CI %",
+    "ECE 原→校准",
+    "NLL 原→校准",
+    "Brier 原→校准",
+    "错误 AUROC 原→校准"
+  ],
+  "rows": [
+    [
+      17,
+      "IID",
+      "36.00",
+      "[30.75, 42.00]",
+      "0.2857 → 0.0558",
+      "1.7974 → 1.3310",
+      "0.8289 → 0.7178",
+      "0.603 → 0.633"
+    ],
+    [
+      17,
+      "规模 OOD",
+      "39.25",
+      "[33.25, 45.00]",
+      "0.2590 → 0.0393",
+      "1.7380 → 1.3135",
+      "0.8004 → 0.7086",
+      "0.631 → 0.654"
+    ],
+    [
+      17,
+      "表示 OOD",
+      "33.75",
+      "[27.50, 39.75]",
+      "0.3645 → 0.0466",
+      "2.2644 → 1.3803",
+      "0.9422 → 0.7407",
+      "0.566 → 0.578"
+    ],
+    [
+      17,
+      "组合 OOD",
+      "35.75",
+      "[30.25, 41.25]",
+      "0.3618 → 0.0355",
+      "2.2927 → 1.3725",
+      "0.9564 → 0.7384",
+      "0.508 → 0.533"
+    ],
+    [
+      43,
+      "IID",
+      "39.25",
+      "[34.00, 45.00]",
+      "0.2462 → 0.0507",
+      "1.6817 → 1.3026",
+      "0.7896 → 0.7039",
+      "0.634 → 0.662"
+    ]
+  ],
+  "frozen_calibrations": {
+    "17": {
+      "temperature": 4.814122298392227,
+      "artifact_sha256": "0cc09742152c93864212079884aff3373f8a82a8c12044e8d26ab1f1b31fd666"
+    },
+    "43": {
+      "temperature": 4.518173154580739,
+      "artifact_sha256": "adf5c98cd9c2859ab094a2c414ae1e3288b54e2751e38634c2f59b5355dd61e5"
+    }
+  },
+  "source_conditions": [
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_iid",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_iid.json",
+      "report_sha256": "c72b66997ad66082256ccf614861868fd75e112f220d25c759f6f82485bd9d48",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_iid.audit.v2.json",
+      "audit_sha256": "f4747fcc7a1a66792b9f58717cecf9440100b2e929eeabb54b57098d813cd0e8"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_scale",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_scale.json",
+      "report_sha256": "aca6f47a8ad04380ed53690714955288c011676c1b3a4c3e5be7d776aa3bc7ce",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_scale.audit.v2.json",
+      "audit_sha256": "d490345278a8f2c3c25df221df7e4c0b5a8c3f0d22db1eaab2f31d55b0d3823d"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_representation",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_representation.json",
+      "report_sha256": "f8d8955b52461105c74c3e041300278b42a6c231c1e3b68ad07cafc3dcb502ed",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_representation.audit.v2.json",
+      "audit_sha256": "787c018bd0db00925534f342e54438e49591421805da64dacefb0c4991cbf073"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood.json",
+      "report_sha256": "e039a8cf94081ab7d58f78130a311f6dc47c7b10689225d32a8220b38a087b46",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood.audit.v2.json",
+      "audit_sha256": "cb66b73a47cee80926daf90bb7727e60daeb60e84cbe43b6cf260c6b6c73ecd3"
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_iid",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_iid.json",
+      "report_sha256": "678b1fca947c1e3eee2030c061e399c75470d16e06ea02dc47d03323d07f89e3",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_iid.audit.v2.json",
+      "audit_sha256": "7f49f40494725ef23094f967c1051fb3a50438ba316496d99c9d4a7e1c7bb862"
+    }
+  ],
+  "scope": "Same rows as the HTML/PDF summary table; separate CPU stratum, no S2 or primary GPU completion claim"
+}

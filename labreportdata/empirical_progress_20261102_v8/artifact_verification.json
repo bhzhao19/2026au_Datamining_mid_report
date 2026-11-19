@@ -1,0 +1,36 @@
+{
+  "kind": "measured-progress-report-artifact-verification",
+  "passed": true,
+  "verified_at": "2026-11-02T06:32:09.057668+00:00",
+  "final_project_complete": false,
+  "pages": 30,
+  "figures": 21,
+  "figure_exports_checked": 63,
+  "cpu_conditions_checked": 6,
+  "complete_data_seeds": 1,
+  "required_data_seeds": 3,
+  "pdf_summary_table_rows_independently_recomputed": 6,
+  "table_check_method": "All JSON/HTML table cells independently compared to audit metrics, original group CIs and exact per-seed calibration artifacts; PDF table visually checked",
+  "table_sha256": "2e6b1ebca3d4e92f3a362810c44399a59b4a7f90a2dd3d2e904bae60ed8776d6",
+  "posthoc_order_diagnostic_included": true,
+  "baseline_audit_exact_bindings_verified": true,
+  "baseline_artifact_hashes_checked": 359,
+  "pdf_sha256": "89c701e83015c36a999528bb69b714e12bc576ae52cb96118c9887b824b6f0b5",
+  "html_sha256": "d274c8d6749a3f830b7d42d7e2342deea6a19958a2dcf6871eea6e4f1de8cdd6",
+  "manifest_sha256": "0524ac712489389ef072df6389e3e15fc0d9a9e02086fa0cd2255691e0de4a33",
+  "generator_source_archive": "reports/empirical_progress_20261102_v8/build_report_source.py.txt",
+  "generator_source_sha256": "4c0c5529b3e8bd06dfba2caf572f85a1cd4442c9dec4bdd3cbd94e8038311ee8",
+  "artifact_checker_source_sha256": "2684c9fc5666d0086cf93e54db0ee97012509a9353e8ed9242f7cd03310ece8a",
+  "visually_checked": [
+    "PDF page3 common CPU methods and both frozen temperatures",
+    "PDF page4 all6 complete condition table rows",
+    "PDF page30 all original remaining requirements",
+    "Seed43 combined OOD accuracy/reliability figure and both deterministic cases"
+  ],
+  "preview_sha256": {
+    "reports/empirical_progress_20261102_v8/cpu_overview_01.png": "d415bc955b02e43f317f6cde1d4ded09d5217d51da6935eb7004fa6900ad75e4",
+    "reports/empirical_progress_20261102_v8/cpu_overview_02.png": "7fba3b1d8857e561dd0fdebba8e0f0cafc7030a33bde3412d2b2d34290c1bbcf",
+    "reports/empirical_progress_20261102_v8/remaining_preview.png": "5cd990ff33ec4d640ea0c459522ce37916ad9c51824d7399353ce6661338a5e6"
+  },
+  "scope": "Six of twelve supplementary CPU conditions; original GPU E1-E4, public LLM, actual GPU/API and final-report requirements remain pending"
+}

@@ -1,0 +1,212 @@
+{
+  "kind": "measured-progress-report",
+  "final_project_complete": false,
+  "baselines": {
+    "17": "de03543e32706e635f8f0749ae0a6169499d0dfae445bcd437deb5f7298fd1ed",
+    "43": "9884da0fa6a83f4fea29b395b234ae363b938fb8bfb386f57c82137208497b54",
+    "97": "0f8b3d03ec4107193f06db5fc5c92c183128dfff03e2c8afdcefe2dc903ea20a"
+  },
+  "e3": {
+    "17": "0f63db5729acf5312c3df0f57a2d13ab75f26b0a5f51b0b62859f10552d61bc7",
+    "43": "e01eb199dc0e055ea64bebb8e4b0d4294839138b7e6a0a5e0609cefc1b2ec63e",
+    "97": "4ab2c77f2f5a70d4a104ca689908adb6ce68f81dca1114beed73cc2a3a06ef4e"
+  },
+  "figures": {
+    "cpu_08b_seed17_test_iid": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "c1172b8f77ee40f811139f013258d0c73ef773df8a3301341768bdea165e895e",
+      "pdf_sha256": "a70f7bd9fbb9a79a8d87460c9eba148e92dc260109d67e848602990117e1148d",
+      "svg_sha256": "38db61ee8b95204559fb5c9b250cd3f314535426af75c3aa26ea60cf878493de"
+    },
+    "cpu_08b_cases_seed17_test_iid": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "8b97745a7ef55b22dbbff73ab055303266e49983ee6a49e58bcdc6a93108a83a",
+      "pdf_sha256": "8b023381490c49d30dfb22ae8bf26004f3630b69306266eb4f6f53292bdfdef4",
+      "svg_sha256": "c39229f108a19881c8d6af4d15771b9379b9f6b1bca8b01c899d12348f19ef2c"
+    },
+    "cpu_08b_seed17_test_ood_scale": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "495821bdb6cad7ec8e475420830f02d41b6aa4b6a4c3fe120e65e49563685076",
+      "pdf_sha256": "01d86019eea56a53884a1a8674af9e34846877474502a99ddd3373e5930817ab",
+      "svg_sha256": "a504f1e259117796f7a2583abbd38422e000508f775804fd1f80f30d42e8f46c"
+    },
+    "cpu_08b_cases_seed17_test_ood_scale": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "d4004ccb73210aadf885f3c3442eb6fa40b205d80a53274b62e84b34400d325e",
+      "pdf_sha256": "c8b24a8e774d6a6d094ffe925082ed4a6011380959d47de604efc882ae2e9ce5",
+      "svg_sha256": "1b3cd0d877ab99cbb156b3055393c890bee94dbb57c71d22a42d97d49aba672c"
+    },
+    "cpu_08b_seed17_test_ood_representation": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "4103358ca208f9780c73a5109bf6e22b84078162012645ac36a25f4e99019211",
+      "pdf_sha256": "3e74d405e6a6062795a717ed9f9f4dbad11db3b38b8ef31d6bb8c0fe933afbc0",
+      "svg_sha256": "2c0c10de40f55daaf29755eade434f657146a344a435a8aaed4b45152ebbccdc"
+    },
+    "cpu_08b_cases_seed17_test_ood_representation": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "9886b398c74ab52c6fb6f6bd4926683f2f96744e908d28246f1e74a85044840b",
+      "pdf_sha256": "4bd6cbb8f493a26ef83e518219dac9fae6048eace0a2c2984b3ccb228c22ffbc",
+      "svg_sha256": "3ee8afb9eb4f38981c1914a7f056ebe939fa52ea88a760479a706186ef7b4092"
+    },
+    "cpu_08b_seed17_test_ood": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "3032331d3d6aca5b5f38693795d676324468fd0012b2e77283dd161de299e835",
+      "pdf_sha256": "e95db802cc9c8a50398b69c9235e04e6a317552cb1be25e5a69a7bcfed9f70e8",
+      "svg_sha256": "14d422c1e46ac4fd94ae0cdc907ffc65cd1430c57991b04ac39c129f54af3392"
+    },
+    "cpu_08b_cases_seed17_test_ood": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "372b49f5e6be91b91ef8645451c0bed9d784d185e1841d6b71511123ee53e010",
+      "pdf_sha256": "564b2d45cd6243c653e6137327ba3ebd6f2f8e103e589da238a6795bbd81f142",
+      "svg_sha256": "c191a4e2872604e073f4806e2d56b3524ca59c76c894ee4eccc126ed6fbc0259"
+    },
+    "cpu_08b_seed43_test_iid": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "5566c60bda362895b83660d2bad640cb56882bf8af38d55158da9c11b081656b",
+      "pdf_sha256": "b5405a7982fd8efc3abd388de7ef8441bd60946ba78b7c35069a53d6a76b3bf1",
+      "svg_sha256": "83eeffbe116b2287327afcdcf53068b72d6b1b8f1dce58f2eb9a864a144ec6e7"
+    },
+    "cpu_08b_cases_seed43_test_iid": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "0285cfafa1bc2e01164e9d3d02ea24751b3d5f7d847bb2a3f55f8014a0cae710",
+      "pdf_sha256": "66a29f9085a58ec9d6df4f151eea643ae5780a2a42fff94805dca528c4be35af",
+      "svg_sha256": "5fe864be5e1571b1a36cdc59e77a206dfa284ba1c1a110aa8d59b8f4582d17e0"
+    },
+    "cpu_08b_seed43_test_ood": {
+      "caption": "同一留出文件的描述性对照：0.8B 未做任务微调，传统模型使用 1200 条训练标签；这不是匹配训练预算或算力的因果比较。仅 0.8B 的误差条为 1000 次场景组 bootstrap 95% 区间。可靠性图为固定十桶，不用测试标签拟合温度。",
+      "png_sha256": "d92b4f60c5a03abf86ebdcaa40c69a6427493e3aa19467b28b985f5db6c5d1ff",
+      "pdf_sha256": "1e68b2dd9c04ef10c8fd1fe1106cce28f87c6fdf86258ca9b3ff23d484d53aa1",
+      "svg_sha256": "bca43ab9b10bebd6b5866aaf35c83c3e672582f366cfdd93409a678a10d4e207"
+    },
+    "cpu_08b_cases_seed43_test_ood": {
+      "caption": "全部类别计数与确定性选例同时报告。案例中的规则标签由原始可见状态复算；没有生成或编造模型思维链。尚无对应生成式 S2 的修正、损害或净收益测量。",
+      "png_sha256": "7967b5652b67e0b18136aef20d80708844438b4218f339f7165d1006bdeb5e79",
+      "pdf_sha256": "a3a5e84643b07c95034a782947fac10afee5389568ada43a9f309d8f5d1f4de6",
+      "svg_sha256": "36dc9bea12f7c1cc9b241b490463b5682b1297d28c24e6e3af83827527ec9a0c"
+    },
+    "public_task_accuracy": {
+      "caption": "SST-2 / RTE / BoolQ 完整公开 dev 分别为 872 / 277 / 3270 行。柱为三个训练种子的均值，误差条为样本标准差；同一 dev 重复评估不算三份独立测试样本。所有模型只在原训练证据组的 70% 上拟合，另 15% 校准、15% 选路由阈值；与 dev 共享证据的训练组已剔除。",
+      "png_sha256": "65f5ca7ea8b08d8d5e086feedbd994350dbb363c4722dc8eca3c51a739a0425f",
+      "pdf_sha256": "f1930e2a5cc200f5b723832804e64c859d3d6cc022ac14a41f0028b6c812dc15",
+      "svg_sha256": "6a73df8d68716db0893c9724613f385fe2ed5de31ef843332081f0b01f34b11e"
+    },
+    "baseline_accuracy": {
+      "caption": "三种子均值 ± 样本标准差；每种子每测试划分 400 行、200 个场景组。文本与结构化特征分别展示，不能将差异全归因于模型。",
+      "png_sha256": "9c41486743cb42c9bd4efbb3eb84060b2b3c9b655edfb5213f3998b1efa32a95",
+      "pdf_sha256": "3a67b21847cabd1ee614788deabb5412eb5f463cdebdf2085b2518e4efff2dfa",
+      "svg_sha256": "6c045a94500589d82363171f8404ac15669a5dbb7052aa5ac4eee046f77b5e33"
+    },
+    "reliability": {
+      "caption": "每个种子的温度只在自己的独立 calibration 划分拟合，再合并测试桶作图。OOD 校准表现不保证改善。",
+      "png_sha256": "4c6ede59d2b21596e3dcb524e2cbe19573a20e99bc7a401983b66547770c3a1b",
+      "pdf_sha256": "5e047fa1ba58ff33c13bf7ef38f4c5df25a270ca16f6e8c46b19b4e93c5bf9df",
+      "svg_sha256": "0b0239ab82bbcda6cd794c739b3c78a500b4945189c7df9d79829198e526e464"
+    },
+    "risk_coverage": {
+      "caption": "阈值保留完整置信度相同的样本组；曲线为三种子的阶梯函数均值。低置信度检错与错误可被升级修复是两个不同问题。",
+      "png_sha256": "f953c83b0f319525d9eebff236238e748c9a97624bce32058449007bf60ea99c",
+      "pdf_sha256": "8e5c1b57a406d15556f8930338a73f756809d25db0833bcb58e6d77adaf015a6",
+      "svg_sha256": "37a1310514828ce375d0c29c93f010918c1111aec504efbff451801fb9311baf"
+    },
+    "matched_budget_routing": {
+      "caption": "探索性 CPU 分类器重放；每个预算所有策略升级数量相同。Oracle 使用测试标签，仅作上界。图中的批量排序曲线不用于选择冻结阈值。",
+      "png_sha256": "e122bd41c4e1be7bbc265cbf28e5caa0a68b93cc5f38d12af1b38a1064e7e9bb",
+      "pdf_sha256": "da48b6a70f8bad8e3ea9d947755417ada26313f7c5f3c23ca3704dc5d08f6c27",
+      "svg_sha256": "a9b6732d7c3a7d3ab3dfc5572acb85ace91c935f56c016901196f730447ee6f3"
+    },
+    "fix_harm_and_budget": {
+      "caption": "冻结阈值按种子独立选择。修正与损害使用决策行计数，置信区间按场景组抽样；同场景的两个选项顺序变体不是独立样本。",
+      "png_sha256": "768cb8c934155c84d188eddf3e4fb3038ba82c2c189b79618b7d2bf4edb3f226",
+      "pdf_sha256": "b18f3ea9d37d305ea9477699ccd4ed1fbfa74891e9c73b97b8d51cd642ebf8ef",
+      "svg_sha256": "8946d7bfa1c0b1b4410690b6555a77e8257d84d05e0803b7bd28e368c823c7de"
+    },
+    "decision_scenarios": {
+      "caption": "每一类别按 SHA-256(id) 确定展示样本；同时给出成功和失败，完整类别计数见原始 casebook。案例只能说明机制，不能证明总体优势。",
+      "png_sha256": "65dd962beb8c492cac254e5c3cd77a83afd04a5b16b5fadce77a0c122c503b4d",
+      "pdf_sha256": "80d7e72c992a42711005fdd1214d3975957948c0677606c2a81466b1e9e690b3",
+      "svg_sha256": "a686ff4457a40076d6f31a79a390c8a471032d26ed259f728f13b23aaf0c9362"
+    },
+    "shared_handoff_architecture": {
+      "caption": "实现不要求 GPU 创建网络连接；部署目标与已验证范围分别标示。原子发布、身份绑定、取消和失败回退均有独立进程检查。",
+      "png_sha256": "75f7fb836aaf7e43a524a2bf0a616086f3047e22056c9a52d77c06a89bb49225",
+      "pdf_sha256": "468032f560025396ae66bf8bb5a887bb6f1eee448120e24752a2743e8b63470b",
+      "svg_sha256": "639ce1b182fa50ca7509cbc0e5443743ed1ba0a35135f651b683e722c8db48d8"
+    },
+    "shared_handoff_latency": {
+      "caption": "同一批 4,800 个留出请求重新实时执行，不是新增的独立质量样本。柱为全体请求均值，虚线为单请求 P95；S2 时间按全体请求摊销。不能将 CPU 时延外推为 GPU/API 服务性能。",
+      "png_sha256": "0dc18ba6304dce4f81f1c9024f00fbaaf30ded733782aa117c85cdeed388dc36",
+      "pdf_sha256": "dc1dfa9cdf1287c678c65401b7cf65c1804831c014787d364dc99dcec678567d",
+      "svg_sha256": "4c562b4822db41ecc5d662231a89a4eb7ffcf9bb68f9f0c34b1196e40970f5f3"
+    }
+  },
+  "baseline_audit_sha256": "b1e7660f74c480b971786c0c389191ed427e584274f41a619be0d50138b5d959",
+  "cpu_frozen_calibrations": {
+    "17": {
+      "temperature": 4.814122298392227,
+      "artifact_sha256": "0cc09742152c93864212079884aff3373f8a82a8c12044e8d26ab1f1b31fd666"
+    },
+    "43": {
+      "temperature": 4.518173154580739,
+      "artifact_sha256": "adf5c98cd9c2859ab094a2c414ae1e3288b54e2751e38634c2f59b5355dd61e5"
+    }
+  },
+  "cpu_order_diagnostic_sha256": "20d6b6ea81bd127a86c93f9ade1f423e36ef7e06c4f63cfed7003dd243b5f1f7",
+  "cpu_order_verification_sha256": "1ed1a0af945078d740a9e0d82bc3b4af4c6620a3fd9078f9d10972341680ed48",
+  "cpu_conditions": [
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_iid",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_iid.json",
+      "report_sha256": "c72b66997ad66082256ccf614861868fd75e112f220d25c759f6f82485bd9d48",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_iid.audit.v2.json",
+      "audit_sha256": "f4747fcc7a1a66792b9f58717cecf9440100b2e929eeabb54b57098d813cd0e8"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_scale",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_scale.json",
+      "report_sha256": "aca6f47a8ad04380ed53690714955288c011676c1b3a4c3e5be7d776aa3bc7ce",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_scale.audit.v2.json",
+      "audit_sha256": "d490345278a8f2c3c25df221df7e4c0b5a8c3f0d22db1eaab2f31d55b0d3823d"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_representation",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_representation.json",
+      "report_sha256": "f8d8955b52461105c74c3e041300278b42a6c231c1e3b68ad07cafc3dcb502ed",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood_representation.audit.v2.json",
+      "audit_sha256": "787c018bd0db00925534f342e54438e49591421805da64dacefb0c4991cbf073"
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood.json",
+      "report_sha256": "e039a8cf94081ab7d58f78130a311f6dc47c7b10689225d32a8220b38a087b46",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed17/test_ood.audit.v2.json",
+      "audit_sha256": "cb66b73a47cee80926daf90bb7727e60daeb60e84cbe43b6cf260c6b6c73ecd3"
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_iid",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_iid.json",
+      "report_sha256": "678b1fca947c1e3eee2030c061e399c75470d16e06ea02dc47d03323d07f89e3",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_iid.audit.v2.json",
+      "audit_sha256": "7f49f40494725ef23094f967c1051fb3a50438ba316496d99c9d4a7e1c7bb862"
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_ood",
+      "report": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_ood.json",
+      "report_sha256": "7658e1ea14d8245f4d57934a8e8758f935798fc33f5aa79a349388d0b9a2d7ae",
+      "audit": "results/cpu_secondary_conditions_v1/labqueue_v1_seed43/test_ood.audit.v2.json",
+      "audit_sha256": "d0a0dbcb4c3a8bf45bec9ef82fed89b7664d7d7afdd5ca4bed0181eab4c3b033"
+    }
+  ],
+  "shared_handoff_sha256": "71fd591df4b7ebb112d94527b57eab857025bb167d23d824960cc22e50837813",
+  "shared_audit_sha256": "f471f77b094d6cdc14dc611b6bafd47a3d2e0551881eede4325e5a56d01dcf66",
+  "public_summary_sha256": "33b60d9f63899158f40f6a45018507593ebb8cabff67b462b41c16dc343fa273",
+  "public_audit_sha256": "a0f6b1676612b9ae71748ba292d44f9eb94e1f95de1d2224edbb970a0689bdce",
+  "cpu_results_table_sha256": "2e6b1ebca3d4e92f3a362810c44399a59b4a7f90a2dd3d2e904bae60ed8776d6",
+  "report_html_sha256": "d274c8d6749a3f830b7d42d7e2342deea6a19958a2dcf6871eea6e4f1de8cdd6",
+  "report_pdf_sha256": "89c701e83015c36a999528bb69b714e12bc576ae52cb96118c9887b824b6f0b5"
+}

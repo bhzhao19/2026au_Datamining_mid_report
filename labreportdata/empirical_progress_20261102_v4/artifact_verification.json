@@ -1,0 +1,30 @@
+{
+  "kind": "measured-progress-report-artifact-verification",
+  "passed": true,
+  "verified_at": "2026-11-02T02:52:39.006592+00:00",
+  "final_project_complete": false,
+  "pages": 22,
+  "figures": 13,
+  "figure_exports_checked": 39,
+  "cpu_conditions_checked": 2,
+  "posthoc_order_diagnostic_included": true,
+  "baseline_audit_exact_bindings_verified": true,
+  "pdf_sha256": "d65a6cacf776f4bf6eb7490c421674f6e4737f0a1ab0d31d5d6b69c865a7a6aa",
+  "html_sha256": "e97de105b134fb629d5792d7eae7c5e69d4b94bd1ae1a60aaa896e6a02387de8",
+  "manifest_sha256": "c71ab2315ee44a7fc796925ff9fa32b0ab119e9c59bdc015fdbfedbe3bebcbf5",
+  "generator_source_archive": "reports/empirical_progress_20261102_v4/build_report_source.py.txt",
+  "generator_source_sha256": "bc8b92eeaf89a22c7c0f520db306bfb390c2b5b3a10fdcf0e0563576ef11351b",
+  "visually_checked": [
+    "PDF page 4: full combined OOD result and scope",
+    "PDF page 5: post-hoc order analysis and limitations",
+    "PDF page 22: every remaining original requirement",
+    "Combined OOD accuracy/reliability figure",
+    "Combined OOD correct and incorrect cases"
+  ],
+  "preview_sha256": {
+    "reports/empirical_progress_20261102_v4/new_methods_01.png": "38279e338c612d3969098b2599bfe2f202854fccfaa36a0626af04fe87715128",
+    "reports/empirical_progress_20261102_v4/new_methods_02.png": "cd64d552a572b40e16e533635f63c275c7b59084e26388da3779e654c8886f0f",
+    "reports/empirical_progress_20261102_v4/remaining_preview.png": "a981f6decbf436d1c605b9bab3dda83051ceb870f28d7b31187d1dab719cd16d"
+  },
+  "scope": "Two of twelve supplementary CPU conditions; all original GPU E1-E4, public LLM, actual GPU/API and final-report requirements remain pending"
+}

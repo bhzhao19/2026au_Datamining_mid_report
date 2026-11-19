@@ -1,0 +1,347 @@
+{
+  "kind": "analytical-fixed-uniform-labqueue-reference",
+  "passed": true,
+  "observed_at": "2026-11-02T10:57:03.160037+00:00",
+  "conditions": [
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_iid",
+      "data": "data/labqueue_v1_seed17/test_iid.jsonl",
+      "data_sha256": "fe6a0b904142967b15c867cb36667f4672b1774c9a6129dc24db471fe5f1a461",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "reject": 100,
+        "queue": 100,
+        "split": 100,
+        "dispatch": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_scale",
+      "data": "data/labqueue_v1_seed17/test_ood_scale.jsonl",
+      "data_sha256": "3a0fb2dc2a42c4582bccf5fc110fc401b5c378c5b167a8b9b75f439f891a8f2f",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "queue": 100,
+        "reject": 100,
+        "split": 100,
+        "dispatch": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood_representation",
+      "data": "data/labqueue_v1_seed17/test_ood_representation.jsonl",
+      "data_sha256": "4a0178613ca1dad9e4d45bc88539ac70bb72a55e71b25eae2d8f88e0eb24ffc2",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "split": 100,
+        "reject": 100,
+        "dispatch": 100,
+        "queue": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed17",
+      "condition": "test_ood",
+      "data": "data/labqueue_v1_seed17/test_ood.jsonl",
+      "data_sha256": "159ee362fcd6fa407a36cdba8412839904b0ab71e8a08587071ca949524b7265",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "split": 100,
+        "reject": 100,
+        "queue": 100,
+        "dispatch": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_iid",
+      "data": "data/labqueue_v1_seed43/test_iid.jsonl",
+      "data_sha256": "572cdd807b073eb99cc55eead3753e9be6d86ae2807badf9ba76b0fa34b8dd9b",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "reject": 100,
+        "split": 100,
+        "dispatch": 100,
+        "queue": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_ood_scale",
+      "data": "data/labqueue_v1_seed43/test_ood_scale.jsonl",
+      "data_sha256": "7bcc9f4c712933aad26d447220ac72fd0548e7fbffb4e5befc5c18a47f2950e1",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "queue": 100,
+        "split": 100,
+        "dispatch": 100,
+        "reject": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_ood_representation",
+      "data": "data/labqueue_v1_seed43/test_ood_representation.jsonl",
+      "data_sha256": "0bcd1bdf78a217955c06ba560d05b6325e5d44ae006d476f5a2ff05bb8134025",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "dispatch": 100,
+        "queue": 100,
+        "split": 100,
+        "reject": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed43",
+      "condition": "test_ood",
+      "data": "data/labqueue_v1_seed43/test_ood.jsonl",
+      "data_sha256": "dad2004d1d2fa10694f583d1fd6dc5f66c07260f4c862c541ed4ac9b4b40c46e",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "dispatch": 100,
+        "split": 100,
+        "queue": 100,
+        "reject": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed97",
+      "condition": "test_iid",
+      "data": "data/labqueue_v1_seed97/test_iid.jsonl",
+      "data_sha256": "8f9e98166c8a94b19ba0bb6c2ff79df38cb5b26d3e2f709cd184141567596804",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "queue": 100,
+        "dispatch": 100,
+        "split": 100,
+        "reject": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed97",
+      "condition": "test_ood_scale",
+      "data": "data/labqueue_v1_seed97/test_ood_scale.jsonl",
+      "data_sha256": "38572fb4c475aacdbd73f30750226c969423b03a77f280ed4b3f277f1d8f6474",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "queue": 100,
+        "split": 100,
+        "reject": 100,
+        "dispatch": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed97",
+      "condition": "test_ood_representation",
+      "data": "data/labqueue_v1_seed97/test_ood_representation.jsonl",
+      "data_sha256": "99507ba0c47410cab70590da20a110dfd4f480f87f168379bc2f10b5f229ca38",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "queue": 100,
+        "split": 100,
+        "reject": 100,
+        "dispatch": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    },
+    {
+      "dataset": "labqueue_v1_seed97",
+      "condition": "test_ood",
+      "data": "data/labqueue_v1_seed97/test_ood.jsonl",
+      "data_sha256": "af8d7f605aca40331c743cb26fae8d143430660aad0415f892e49f70d76f5d34",
+      "rows": 400,
+      "scenario_groups": 200,
+      "classes": [
+        "dispatch",
+        "queue",
+        "reject",
+        "split"
+      ],
+      "label_counts": {
+        "dispatch": 100,
+        "queue": 100,
+        "split": 100,
+        "reject": 100
+      },
+      "fixed_tie_label": "dispatch",
+      "accuracy": 0.25,
+      "ece": 0.0,
+      "brier": 0.75,
+      "nll": 1.3862943611198906,
+      "error_detection_auroc": 0.5,
+      "confidence": 0.25
+    }
+  ],
+  "formula": {
+    "accuracy": "Count of lexically first class / N",
+    "ece": "abs(accuracy - 1/K); all scores in one fixed bin",
+    "brier": "(1-1/K)^2 + (K-1)/K^2",
+    "nll": "log(K)",
+    "error_detection_auroc": "0.5: every positive-negative pair is a score tie"
+  },
+  "input_condition_count": 12,
+  "additional_model_calls": 0,
+  "additional_independent_samples": 0,
+  "fitted_parameters": 0,
+  "router_selected": false,
+  "posthoc_explanatory_reference": true,
+  "analysis_source_sha256": "d2ffedd5f76065b27428b48674a575aca23b2b72b10f8010450fe0efae24dc8f",
+  "full_project_complete": false,
+  "scope": "A fixed distribution on the declared balanced four-class LabQueue sets only. Analytical scores, not measured model inference; no S2 gain, CUDA evidence or real-world calibration guarantee."
+}
