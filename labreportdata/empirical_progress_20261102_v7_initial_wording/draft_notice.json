@@ -1,7 +1,0 @@
-{
-  "kind": "unpublished-initial-report-render",
-  "observed_at": "2026-11-02T05:49:55.221905+00:00",
-  "published": false,
-  "reason": "Separate GPU E1-E4 requirement wording from the 4B model size; E4 uses0.8B. No scores or statistical methods changed.",
-  "generator_sha256": "ac9d9ddf4e6dc20f73b28ba906cd105bd670eff144e1e406bd784335f73cb49d"
-}
