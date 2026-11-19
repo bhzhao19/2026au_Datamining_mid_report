@@ -215,6 +215,32 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   \textbf{同一个错例}\quad 正解是 \texttt{dispatch}，校准前后都选 \texttt{split}，置信度从 54.0\% 降到 31.4\%。
 \end{frame}
 
+\begin{frame}{E3｜温度校准前后的四项指标}
+  \small
+  Intern-Decision 0.8B 在 LabQueue 留出集上的结果。每格为种子 17、43、97 的算术平均，箭头表示原始分数到校准后分数。
+
+  \medskip
+  {\centering
+  \scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{测试条件} & \textbf{ECE $\downarrow$} & \textbf{NLL $\downarrow$} & \textbf{Brier $\downarrow$} & \textbf{错误 AUROC $\uparrow$}\\
+    \midrule
+    IID      & $0.268\to0.047$ & $1.751\to1.318$ & $0.820\to0.712$ & $0.599\to0.631$\\
+    规模 OOD & $0.262\to0.051$ & $1.773\to1.322$ & $0.820\to0.714$ & $0.591\to0.613$\\
+    表示 OOD & $0.338\to0.045$ & $2.192\to1.371$ & $0.914\to0.736$ & $0.550\to0.564$\\
+    组合 OOD & $0.362\to0.031$ & $2.275\to1.372$ & $0.943\to0.737$ & $0.550\to0.561$\\
+    \bottomrule
+  \end{tabular}\par}
+
+  \medskip
+  \begin{itemize}
+    \item ECE（校准误差）、NLL（负对数似然）和 Brier（概率平方误差）在 12 个种子与测试集组合中均下降。所选动作及准确率保持不变。
+    \item 错误 AUROC 衡量低置信度能否排出错题。九个 OOD 条件的 AUROC 差值 95\% 区间均包含零。
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{E3｜校准后，Jev 更容易挑出错题吗？}
   \small
   \begin{block}{怎样算校准得好？}
