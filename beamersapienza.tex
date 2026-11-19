@@ -44,7 +44,7 @@
 
 \section{Progress}
 
-\begin{frame}[fragile]{实验环境：E1-E4 自动化构建}
+\begin{frame}[fragile]{E1--E4｜实验环境与自动化脚本}
   \begin{columns}[T]
     \begin{column}{0.35\textwidth}
       \begin{itemize}
@@ -83,7 +83,49 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   \end{columns}
 \end{frame}
 
-\begin{frame}{LabQueue数据集：规则选择一个调度动作}
+\begin{frame}{E1 补充｜公开任务的传统监督基线}
+  \small
+  官方模型的 GPU 复现待运行。传统监督对照使用 TF-IDF + NB、LR、SVM，在三个任务上各训练三个数据种子，共 27 组完整公开验证集评估。
+
+  \medskip
+  \centering
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    \textbf{任务} & \textbf{模型三种子均值范围} & \textbf{训练多数类基线}\\
+    \midrule
+    SST-2 & 81.61\%--82.11\% & 50.92\%\\
+    RTE   & 49.34\%--51.74\% & 52.71\%\\
+    BoolQ & 62.25\%--64.33\% & 62.17\%\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  \footnotesize SST-2 的三种模型均高于多数类基线，RTE 的三种模型均低于该基线。数据来源为 v12 阶段报告。
+\end{frame}
+
+\begin{frame}{E2｜快速决策与生成式推理的对照设计}
+  \small
+  \begin{itemize}
+    \item 在同一批题目上比较 Intern-Decision 快速决策与同量级生成式模型的推理表现。
+    \item 已固定样本（632 条请求、含 1,032 个决策）和 128、512、2,048 token 三档生成预算。
+    \item GPU 测试待运行，将比较准确率、请求延迟和生成 token 数。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{E3/E4｜LabQueue-v1 的数据从哪里来？}
+  \small
+  LabQueue-v1 是我们为实验室 GPU 作业调度自建的合成数据集。脚本用固定随机种子生成模拟场景，四种动作标签均衡。
+
+  \medskip
+  \begin{enumerate}
+    \item 按目标动作抽样生成集群总容量、当前可用资源、作业需求、分片方案和前置依赖。
+    \item 用确定性的 \texttt{solve(state)} 按调度规则计算标准答案，并检查它与抽样时指定的目标动作一致。整个标注过程只执行 Python 规则。
+    \item 把同一场景写成两条请求，第二条反转选项顺序。两个版本留在同一数据划分，场景用哈希去重。
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{E3/E4｜LabQueue 的四种调度动作}
   \small
   \textbf{模型输入}\quad 调度指令（\texttt{POLICY}）、当前状态（\texttt{state}，含总容量、当前资源、作业需求、分片与依赖信息）和四个顺序可变的候选动作。
 
@@ -102,11 +144,11 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
 
   \medskip
   \begin{block}{判分}
-    \texttt{solve(state)} 按固定规则生成唯一标签 \texttt{targets["action"]["label"]}。预测动作与标签一致得 1 分，否则得 0 分。
+    预测动作与标准答案一致得 1 分，否则得 0 分。
   \end{block}
 \end{frame}
 
-\begin{frame}{调度规则的优先级与实际错例}
+\begin{frame}{E3/E4｜调度规则的优先级与实际错例}
   \small
   \begin{enumerate}
     \item 有未完成的前置依赖 $\Rightarrow$ \texttt{queue}。
@@ -119,7 +161,7 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   \end{block}
 \end{frame}
 
-\begin{frame}{两种分布偏移：资源规模与状态表示}
+\begin{frame}{E3/E4｜两种分布偏移：资源规模与状态表示}
   \small
   \centering
   \begin{tabular}{@{}lll@{}}
@@ -142,7 +184,52 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   \end{itemize}
 \end{frame}
 
-\begin{frame}{0.8B 零样本决策：平均准确率约 36\%--39\%}
+\begin{frame}{E3｜温度校准调整置信度}
+  \small
+  \begin{columns}[c,onlytextwidth]
+    \begin{column}{.49\textwidth}
+      \centering
+      \includegraphics[width=\linewidth,trim=408bp 46bp 0bp 49bp,clip]{cpu_08b_seed17_test_iid.pdf}\par
+      \scriptsize 种子 17 / IID。虚线表示置信度等于实际正确率。
+    \end{column}
+    \begin{column}{.48\textwidth}
+      \textbf{拟合温度}\quad Jev 权重固定。每个种子用 240 条独立校准样本拟合一个 $T$，目标是最小化负对数似然（NLL）。三个种子合计 720 条，拟合三个温度。
+
+      \smallskip
+      \textbf{校准置信度}\quad 将输出分数除以 $T$ 再转成概率，让各置信度区间的平均置信度与实际正确率更接近。每个种子的四个留出集共用其温度。
+
+      \smallskip
+      \textbf{IID 结果}\quad ECE 从 0.286 降到 0.056，准确率仍为 36.0\%。12 个条件的 ECE 均下降。
+    \end{column}
+  \end{columns}
+
+  \medskip
+  \textbf{同一个错例}\quad 正解是 \texttt{dispatch}，校准前后都选 \texttt{split}，置信度从 54.0\% 降到 31.4\%。
+\end{frame}
+
+\begin{frame}{E3｜校准后，Jev 更容易挑出错题吗？}
+  \small
+  \begin{block}{怎样算校准得好？}
+    假设 Jev 对 100 道题都报 80\% 的置信度，答对约 80 道就算吻合。若只答对 60 道，就高估了 20 个百分点。ECE 按题数加权平均各置信度区间的误差大小。
+  \end{block}
+
+  \begin{itemize}
+    \item \textbf{检验目标}\quad 温度校准后，Jev 能否更常把错题排在对题前面？
+    \item \textbf{怎么测}\quad 在同一批测试题上，分别用校准前后的置信度从低到高排序。用 AUROC 衡量错题排在对题前面的程度。
+    \item \textbf{结果}\quad 九个 OOD 条件的 AUROC 变化，其 95\% 区间均包含零。现有结果尚不能确认校准让 Jev 更容易挑出 OOD 错题。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{E3｜低置信度时，求助能提高准确率吗？}
+  \small
+  \begin{itemize}
+    \item \textbf{怎么测}\quad Jev 模型先作答。置信度低于验证集定好的门槛时，采用慢模型 Qwen 4b 的答案。到测试集比较求助前后的准确率。
+    \item \textbf{已实测}\quad 用两个传统分类器试跑，结构化逻辑回归先答，梯度提升接手。每个种子的四个测试集共用一个门槛。IID 平均准确率从 84.83\% 升至 87.00\%，部分 OOD 准确率下降。
+    \item \textbf{Jev 的实验进度}\quad 已收集验证集上 720 条 Jev 决策及置信度。接下来收集生成式模型的同题答案，再定门槛，并在留出集上测整体准确率和求助次数。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{E4｜0.8B 微调前：平均准确率约 36\%--39\%}
   \small
   CPU 推理使用同一套发布权重，LabQueue 微调样本为 0 条。
 
@@ -176,7 +263,7 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   种子 17 的 IID 事后诊断中，仅反转选项顺序就有 86/200 个场景改变了所选动作。
 \end{frame}
 
-\begin{frame}{有标签的基线学到了什么？}
+\begin{frame}{E4｜LabQueue 传统监督基线}
   \small
   \begin{columns}[c,onlytextwidth]
     \begin{column}{.38\textwidth}
@@ -201,52 +288,7 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   随机森林用标签从结构化字段学习选动作。Jev 读文字规则，零样本执行资源比较和优先级判断。微调能缩小多少差距仍待同一测试集上的前后对照。
 \end{frame}
 
-\begin{frame}{温度校准：调整置信度，保留原来的动作}
-  \small
-  \begin{columns}[c,onlytextwidth]
-    \begin{column}{.49\textwidth}
-      \centering
-      \includegraphics[width=\linewidth,trim=408bp 46bp 0bp 49bp,clip]{cpu_08b_seed17_test_iid.pdf}\par
-      \scriptsize 种子 17 / IID。虚线表示置信度等于实际正确率。
-    \end{column}
-    \begin{column}{.48\textwidth}
-      \textbf{拟合温度}\quad Jev 权重固定。每个种子用 240 条独立校准样本拟合一个 $T$，目标是最小化负对数似然（NLL）。三个种子合计 720 条，拟合三个温度。
-
-      \smallskip
-      \textbf{校准置信度}\quad 将输出分数除以 $T$ 再转成概率，让各置信度区间的平均置信度与实际正确率更接近。每个种子的四个留出集共用其温度。
-
-      \smallskip
-      \textbf{IID 结果}\quad ECE 从 0.286 降到 0.056，准确率仍为 36.0\%。12 个条件的 ECE 均下降。
-    \end{column}
-  \end{columns}
-
-  \medskip
-  \textbf{同一个错例}\quad 正解是 \texttt{dispatch}，校准前后都选 \texttt{split}，置信度从 54.0\% 降到 31.4\%。
-\end{frame}
-
-\begin{frame}{校准后，Jev 更容易挑出错题吗？}
-  \small
-  \begin{block}{怎样算校准得好？}
-    假设 Jev 对 100 道题都报 80\% 的置信度，答对约 80 道就算吻合。若只答对 60 道，就高估了 20 个百分点。ECE 按题数加权平均各置信度区间的误差大小。
-  \end{block}
-
-  \begin{itemize}
-    \item \textbf{检验目标}\quad 温度校准后，Jev 能否更常把错题排在对题前面？
-    \item \textbf{怎么测}\quad 在同一批测试题上，分别用校准前后的置信度从低到高排序。用 AUROC 衡量错题排在对题前面的程度。
-    \item \textbf{结果}\quad 九个 OOD 条件的 AUROC 变化，其 95\% 区间均包含零。现有结果尚不能确认校准让 Jev 更容易挑出 OOD 错题。
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{E3的后续：遇到低置信度时，求助能提高准确率吗？}
-  \small
-  \begin{itemize}
-    \item \textbf{怎么测}\quad Jev 模型先作答。置信度低于验证集定好的门槛时，采用慢模型 Qwen 4b 的答案。到测试集比较求助前后的准确率。
-    \item \textbf{已实测}\quad 用两个传统分类器试跑，结构化逻辑回归先答，梯度提升接手。每个种子的四个测试集共用一个门槛。IID 平均准确率从 84.83\% 升至 87.00\%，部分 OOD 准确率下降。
-    \item \textbf{Jev 的实验进度}\quad 已收集验证集上 720 条 Jev 决策及置信度。接下来收集生成式模型的同题答案，再定门槛，并在留出集上测整体准确率和求助次数。
-  \end{itemize}
-\end{frame}
-
-\section{Supplimentary}
+\section{Supplementary}
 
 \newcommand{\cpucondition}[2]{%
   \begin{frame}{0.8B CPU 补充实测：#1}
@@ -293,27 +335,6 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
   \includegraphics[width=\textwidth,height=.71\textheight,keepaspectratio]{matched_budget_routing.pdf}\par
   \smallskip
   \footnotesize 横轴为升级比例，纵轴为路由后的准确率。每个预算内各策略升级数量相同，虚线是使用测试标签的理论上界。
-\end{frame}
-
-\begin{frame}{备份：公开任务的传统监督基线}
-  \small
-  TF-IDF + NB、LR、SVM 在三个任务上各训练三个数据种子，共 27 组完整公开验证集评估。
-
-  \medskip
-  \centering
-  \begin{tabular}{@{}lrr@{}}
-    \toprule
-    \textbf{任务} & \textbf{模型三种子均值范围} & \textbf{训练多数类基线}\\
-    \midrule
-    SST-2 & 81.61\%--82.11\% & 50.92\%\\
-    RTE   & 49.34\%--51.74\% & 52.71\%\\
-    BoolQ & 62.25\%--64.33\% & 62.17\%\\
-    \bottomrule
-  \end{tabular}
-
-  \medskip
-  \raggedright
-  \footnotesize 数据与分析来源：\texttt{empirical\_progress\_20261102\_v12} 阶段报告。
 \end{frame}
 
 \backmatter
