@@ -1,5 +1,5 @@
 \documentclass{beamer}
-\usepackage{amsfonts,amsmath,oldgerm}
+\usepackage{amsfonts,amsmath,oldgerm,booktabs}
 \usetheme{sintef}
 \usepackage{xeCJK}
 \setCJKmainfont{Noto Serif CJK SC}
@@ -24,10 +24,9 @@
 
 \begin{frame}{CPU 实验目标与研究重点}
 \begin{itemize}
-    \item \textbf{实验背景:} 受限于算力资源，初期实验基于 CPU 进行快速迭代，旨在以最小化成本验证算法框架的可行性。
-    \item \textbf{关键超参数筛选:} 在受限环境下，对模型关键超参数进行高效寻优，确定适合大规模实验的基准配置。
-    \item \textbf{Calibration 有效性验证:} 评估校准策略在 System-1 决策层中的表现，验证置信度校准对决策输出的优化效果。
-    \item \textbf{决策可信度分析:} 通过有限资源下的小规模评估，查看效果以便于建立决策机制的基准评估体系，量化分析模型在不同配置下的输出稳定性与可信度。
+    \item 用 LabQueue 检验 Intern-Decision 0.8B 能否按给定规则选择调度动作，以及在资源规模和输入表示变化时的准确率。
+    \item 用独立校准集拟合温度，检查预测概率与观测正确率的吻合程度，以及置信度区分正确与错误决策的能力。
+    \item 训练传统分类器作为有监督基线，用它们初步测试固定升级预算下的路由和跨进程交接。
 \end{itemize}
 \end{frame}
 
@@ -81,6 +80,168 @@ exec "$E1_PYTHON" scripts/run_e1_baseline.py \
 \end{verbatim}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}{LabQueue数据集：规则选择一个调度动作}
+  \small
+  \textbf{模型输入}\quad 调度指令（\texttt{POLICY}）、当前状态（\texttt{state}，含总容量、当前资源、作业需求、分片与依赖信息）和四个顺序可变的候选动作。
+
+  \medskip
+  \centering
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{动作} & \textbf{含义}\\
+    \midrule
+    \texttt{dispatch} & 立即启动完整作业\\
+    \texttt{queue} & 保持作业不变，等待调度\\
+    \texttt{split} & 按给定方案拆分作业\\
+    \texttt{reject} & 拒绝不可行的作业\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \begin{block}{判分}
+    \texttt{solve(state)} 按固定规则生成唯一标签 \texttt{targets["action"]["label"]}。预测动作与标签一致得 1 分，否则得 0 分。
+  \end{block}
+\end{frame}
+
+\begin{frame}{调度规则的优先级与实际错例}
+  \small
+  \begin{enumerate}
+    \item 有未完成的前置依赖 $\Rightarrow$ \texttt{queue}。
+    \item 完整作业超过总容量 $\Rightarrow$ 可以按给定方案分片且每片都能装下时 \texttt{split}，否则 \texttt{reject}。
+    \item 完整作业能装下，但当前可用量不足 $\Rightarrow$ \texttt{queue}。
+    \item 其余情况 $\Rightarrow$ \texttt{dispatch}。
+  \end{enumerate}
+  \begin{block}{种子 17 的 IID 测试错例}
+    无未完成的前置依赖，当前可用 11 张 GPU 和 98 GB 内存，完整作业只需要 2 张 GPU 和 45 GB 内存。作业可拆分，但资源已经足够，标准答案为 \texttt{dispatch}。模型选了 \texttt{split}，得 0 分。
+  \end{block}
+\end{frame}
+
+\begin{frame}{两种分布偏移：资源规模与状态表示}
+  \small
+  \centering
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{数据划分} & \textbf{资源范围} & \textbf{当前资源的表示}\\
+    \midrule
+    \texttt{train} / \texttt{test\_iid} & 小 & 直接给可用量\\
+    \texttt{test\_ood\_scale} & 大 & 直接给可用量\\
+    \texttt{test\_ood\_representation} & 小 & 给占用量、预留量\\
+    \texttt{test\_ood} & 大 & 给占用量、预留量\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  \textbf{可用量}\quad 直接读取 \texttt{available}，或按各资源维度用总量减去占用量和预留量。
+  \begin{itemize}
+    \item 每个数据种子随机生成 1,200 条训练样本、240 条校准样本和 240 条路由验证样本。
+    \item 每种测试条件含 200 个留出场景，每个场景的两个选项顺序变体都在同一划分，共 400 条请求。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{0.8B 零样本决策：平均准确率约 36\%--39\%}
+  \small
+  在 CPU 上用同一套 Intern-Decision 0.8B 发布权重评估种子 17、43、97，共 4,800 条留出测试请求。模型权重保持冻结。
+
+  \medskip
+  \centering
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    \textbf{准确率（\%）} & \textbf{IID} & \textbf{规模 OOD} & \textbf{表示 OOD} & \textbf{组合 OOD}\\
+    \midrule
+    seed 17 & 36.00 & 39.25 & 33.75 & 35.75\\
+    seed 43 & 39.25 & 37.00 & 33.00 & 37.50\\
+    seed 97 & 38.50 & 40.25 & 40.50 & 36.00\\
+    \textbf{三种子均值} & \textbf{37.92} & \textbf{38.83} & \textbf{35.75} & \textbf{36.42}\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  \begin{itemize}
+    \item 四类均衡，均匀随机参照为 25\%。不同 OOD 条件的相对表现随种子变化。
+    \item 种子 17 的 IID 事后诊断中，仅反转选项顺序就有 86/200 个场景改变了所选动作。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{传统监督基线：组合偏移下准确率下降}
+  \small
+  \centering
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    \textbf{三种子均值（\%）} & \textbf{IID} & \textbf{规模 OOD} & \textbf{表示 OOD} & \textbf{组合 OOD}\\
+    \midrule
+    TF-IDF + NB & 44.0 & 41.5 & 31.7 & 36.2\\
+    TF-IDF + LR & 46.3 & 44.8 & 36.3 & 41.3\\
+    TF-IDF + SVM & 48.3 & 46.8 & 36.0 & 41.3\\
+    结构化 LR & 84.8 & 63.2 & 65.2 & \textbf{48.3}\\
+    随机森林 & 83.8 & 45.2 & 62.7 & 39.3\\
+    梯度提升 & \textbf{88.0} & 43.7 & 63.7 & 40.0\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  6 种分类器 $\times$ 3 个数据种子 $\times$ 4 种条件，共 72 组测试。
+  每个分类器按种子用 1,200 条带标签样本训练，输入为可见状态字段。0.8B 的零样本决策还接收规则指令和候选动作。
+\end{frame}
+
+\begin{frame}{温度缩放改善概率质量，准确率保持不变}
+  \small
+  每个种子用独立的 240 条带标签样本拟合温度，再用冻结后的温度校准该种子的四个测试集。正温度缩放保持最高分动作不变。
+
+  \medskip
+  \centering
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    \textbf{种子 17 / IID} & \textbf{原始} & \textbf{校准后}\\
+    \midrule
+    准确率 & 36.00\% & 36.00\%\\
+    预期校准误差（ECE） & 0.2857 & 0.0558\\
+    负对数似然（NLL） & 1.7974 & 1.3310\\
+    Brier 分数 & 0.8289 & 0.7178\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  在这批四类均衡的数据上，固定输出四个 0.25 也能得到 ECE 0，但准确率只有 25\%，错误检测 AUROC 为 0.5。
+\end{frame}
+
+\begin{frame}{什么时候求助？目前的 CPU 证据}
+  \small
+  \begin{itemize}
+    \item \textbf{0.8B 的错误排序。} 种子 43 的组合 OOD 中，错误检测 AUROC 从 0.595 变为 0.585，配对差值的 95\% 区间为 $[-0.0331,\,0.0139]$。九个 OOD 条件的事后差值区间均包含零。
+    \item \textbf{探索性路由。} 在验证集的 25\% 升级预算内选阈值，将结构化 LR 的低置信度决策转给梯度提升模型。IID 均值从 84.83\% 升至 87.00\%。相对同预算随机升级的收益有波动，部分 OOD 条件准确率下降。
+    \item \textbf{跨进程交接。} 共享目录验证涵盖 4,800 条已有请求和 510 次分类器升级调用。
+  \end{itemize}
+  \begin{block}{下一阶段}
+    在 GPU 上完成 E1--E4，并检验将 0.8B 的决策转给生成式 S2 能带来多少净修正、增加多少调用成本。
+  \end{block}
+\end{frame}
+
+\appendix
+\begin{frame}{备份：公开任务的传统监督基线}
+  \small
+  TF-IDF + NB、LR、SVM 在三个任务上各训练三个数据种子，共 27 组完整公开验证集评估。
+
+  \medskip
+  \centering
+  \begin{tabular}{@{}lrr@{}}
+    \toprule
+    \textbf{任务} & \textbf{模型三种子均值范围} & \textbf{训练多数类基线}\\
+    \midrule
+    SST-2 & 81.61\%--82.11\% & 50.92\%\\
+    RTE   & 49.34\%--51.74\% & 52.71\%\\
+    BoolQ & 62.25\%--64.33\% & 62.17\%\\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \raggedright
+  \footnotesize 数据与分析来源：\texttt{empirical\_progress\_20261102\_v12} 阶段报告。
 \end{frame}
 
 \backmatter
