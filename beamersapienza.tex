@@ -2,7 +2,15 @@
 \usepackage{amsfonts,amsmath,oldgerm,booktabs}
 \usetheme{sintef}
 \usepackage{xeCJK}
-\setCJKmainfont{Noto Serif CJK SC}
+\IfFontExistsTF{Noto Serif CJK SC}{%
+  \setCJKmainfont{Noto Serif CJK SC}%
+}{%
+  \IfFontExistsTF{SimSun}{%
+    \setCJKmainfont[AutoFakeBold]{SimSun}%
+  }{%
+    \setCJKmainfont[BoldFont=FandolSong-Bold.otf]{FandolSong-Regular.otf}%
+  }%
+}
 \graphicspath{{labreportdata/empirical_progress_20261102_v12/figures/}}
 
 \newcommand{\testcolor}[1]{\colorbox{#1}{\textcolor{#1}{test}}~\texttt{#1}}
