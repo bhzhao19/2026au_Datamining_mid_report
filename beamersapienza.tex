@@ -2,6 +2,7 @@
 \usepackage{amsfonts,amsmath,oldgerm}
 \usetheme{sintef}
 \usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
 
 \newcommand{\testcolor}[1]{\colorbox{#1}{\textcolor{#1}{test}}~\texttt{#1}}
 
@@ -14,7 +15,7 @@
 \title{迈向快速且可泛化的开放域决策}
 \subtitle{Intern-Decision 作为System-1 决策层}
 % \course{Master's Degree in Computer Science}
-\author{周家纬\; 孙哲\; 赵博涵\; 张帅宇\; 李春晓\; 孙铮浩\; 谢嘉庆}
+\author{周家纬、孙哲、赵博涵、张帅宇、李春晓、孙铮浩、谢嘉庆}
 % \IDnumber{1234567}
 \date{2026 年11 月19 日}
 
@@ -39,6 +40,47 @@
     \item \textbf{实验 3 (E3)：} 设计置信度机制，看什么时候该求助
     \item \textbf{实验 4 (E4)：} 在jev上微调后，其能力是否可以迁移（以实验室 gpu 任务排班为例），并且验证是否可以容纳多领域内的知识（旧题重测）
 \end{itemize}
+\end{frame}
+
+\section{Progress}
+
+\begin{frame}[fragile]{实验环境：E1-E4 自动化构建}
+  \begin{columns}[T]
+    \begin{column}{0.35\textwidth}
+      \begin{itemize}
+        \item \textbf{框架现状:} E1-E4 实验脚本及自动化工作流已构建完成。
+        \item \textbf{核心特性:}
+        \begin{itemize}
+          \item 支持多后端 (HF/XTuner)。
+          \item 离线模式 (Offline) 支持。
+          \item 开启 GPU 环境后，可直接执行脚本启动任务。
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.65\textwidth}
+      \tiny
+      \begin{verbatim}
+#!/usr/bin/env bash
+set -euo pipefail
+E1_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+E1_BACKEND="${1:-hf}"
+if [[ "$E1_BACKEND" != hf && "$E1_BACKEND" != xtuner ]]; then
+  exit 2
+fi
+cd "$E1_ROOT"
+E1_PYTHON="$E1_ROOT/.venv-$E1_BACKEND/bin/python"
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_DATASETS_OFFLINE=1
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-8}"
+if [[ "$E1_BACKEND" == xtuner ]]; then
+  export PYTHONPATH="$E1_ROOT:$E1_ROOT/upstream/Intern-Decision"
+fi
+"$E1_PYTHON" -m decision_lab.offline_bundle check --backend "$E1_BACKEND"
+exec "$E1_PYTHON" scripts/run_e1_baseline.py \
+  --backend "$E1_BACKEND" \
+  --output "$E1_OUTPUT"
+\end{verbatim}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \backmatter
